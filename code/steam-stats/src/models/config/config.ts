@@ -11,6 +11,6 @@ const _req = (key: string) => {
 };
 
 /** Application configuration. */
-export const config = {
+export const Config = {
   steamApiKey: _req('STEAM_API_KEY'),
 } as const;
