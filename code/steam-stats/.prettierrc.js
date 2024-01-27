@@ -6,7 +6,7 @@ const config = {
   jsxSingleQuote: true,
   experimentalTernaries: true,
 
-  importOrder: ['^next$', '^next/(.*)$', '^[./]'],
+  importOrder: ['^next$', '^next/(.*)$', '<THIRD_PARTY_MODULES>', '^@models/(.*)$', '^[./]'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
 
