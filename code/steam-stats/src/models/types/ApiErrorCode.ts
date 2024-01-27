@@ -5,4 +5,7 @@ export enum ApiErrorCode {
 
   /** InvalidSteamId - The steam ID provided was not valid. */
   InvalidSteamId = 'InvalidSteamId',
+
+  /** InvalidAppId - The steam app ID provided was not valid. */
+  InvalidAppId = 'InvalidAppId',
 }
