@@ -15,6 +15,12 @@ export interface PlayerStats {
   /** The time the player was last seen online. */
   lastLogoffAt: number;
 
+  /** The number of games owned by the player. */
+  ownedGameCount: number;
+
+  /** Total playtime across all games. */
+  totalPlaytime: number;
+
   /** The list of most played games for this player sorted in descending order. */
   mostPlayedGames: PlayerGameStats[];
 }

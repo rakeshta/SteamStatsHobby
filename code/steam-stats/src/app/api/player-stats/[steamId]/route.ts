@@ -9,11 +9,12 @@ const MOST_PLAYED_GAME_COUNT = 10;
 
 // local types ---------------------------------------------------------------------------------------------------------
 
-type PlayerSummary = Omit<PlayerStats, 'mostPlayedGames'>;
+type PlayerInfo = Omit<PlayerStats, 'ownedGameCount' | 'totalPlaytime' | 'mostPlayedGames'>;
+type GamingStats = Pick<PlayerStats, 'ownedGameCount' | 'totalPlaytime' | 'mostPlayedGames'>;
 
 // helpers -------------------------------------------------------------------------------------------------------------
 
-async function _fetchPlayerSummary(steamId: string): Promise<PlayerSummary> {
+async function _fetchPlayerInfo(steamId: string): Promise<PlayerInfo> {
   // fetch data from Steam API. abort if no data found
   const plyerSummaries = await SteamApi.fetchPlayerSummaries([steamId]);
   if (plyerSummaries.length === 0) {
@@ -28,21 +29,25 @@ async function _fetchPlayerSummary(steamId: string): Promise<PlayerSummary> {
     avatarUrl: playerSummary.avatarfull,
     createdAt: playerSummary.timecreated,
     lastLogoffAt: playerSummary.lastlogoff,
-  } satisfies PlayerSummary;
+  } satisfies PlayerInfo;
 }
 
-async function _fetchMostPlayedGames(steamId: string): Promise<PlayerGameStats[]> {
+async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
   // fetch list of owned games for the player & take the top N most played games
   const ownedGames = await SteamApi.fetchOwnedGames(steamId);
-  const mostPlayedGames = sortBy(ownedGames, 'playtime_forever').reverse().slice(0, MOST_PLAYED_GAME_COUNT);
+  const ownedGamesTopN = sortBy(ownedGames, 'playtime_forever').reverse().slice(0, MOST_PLAYED_GAME_COUNT);
+
+  // summarize gaming stats
+  const ownedGameCount = ownedGames.length;
+  const totalPlaytime = ownedGames.reduce((sum, game) => sum + game.playtime_forever, 0);
 
   // fetch game details for all most played games in parallel
-  const mostPlayedGameDetails: PlayerGameStats[] = [];
-  const fetchPromises = mostPlayedGames.map(async (game) => {
+  const mostPlayedGames: PlayerGameStats[] = [];
+  const fetchPromises = ownedGamesTopN.map(async (game) => {
     try {
       // fetch & parse game details
       const appDetails = await SteamApi.fetchAppDetails(game.appid);
-      mostPlayedGameDetails.push({
+      mostPlayedGames.push({
         appId: game.appid,
         name: appDetails.name,
         imageUrl: appDetails.header_image,
@@ -59,19 +64,23 @@ async function _fetchMostPlayedGames(steamId: string): Promise<PlayerGameStats[]
   await Promise.all(fetchPromises);
 
   // return the list of most played games
-  return mostPlayedGameDetails;
+  return {
+    ownedGameCount,
+    totalPlaytime,
+    mostPlayedGames,
+  };
 }
 
 // route handler -------------------------------------------------------------------------------------------------------
 
 export const GET = apiRouteWrapper<{ steamId: string }>(async (req, { params }) => {
   // fetch player summary & most played games
-  const playerSummary = await _fetchPlayerSummary(params.steamId);
-  const mostPlayedGames = await _fetchMostPlayedGames(params.steamId);
+  const playerInfo = await _fetchPlayerInfo(params.steamId);
+  const gamingStats = await _fetchGamingStats(params.steamId);
 
   // compose response
   return {
-    ...playerSummary,
-    mostPlayedGames,
+    ...playerInfo,
+    ...gamingStats,
   } satisfies PlayerStats;
 });
