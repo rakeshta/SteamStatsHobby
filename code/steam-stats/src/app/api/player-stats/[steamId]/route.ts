@@ -50,7 +50,12 @@ async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
       mostPlayedGames.push({
         appId: game.appid,
         name: appDetails.name,
+        shortDescription: appDetails.short_description,
+        developers: appDetails.developers,
+        publishers: appDetails.publishers,
+        genres: appDetails.genres.map((genre) => genre.description),
         imageUrl: appDetails.header_image,
+        backgroundImageUrl: appDetails.background,
         playtime: game.playtime_forever,
       });
     } catch (e) {
@@ -63,7 +68,7 @@ async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
   // wait for all fetches to complete
   await Promise.all(fetchPromises);
 
-  // return the list of most played games
+  // return composed gaming stats
   return {
     ownedGameCount,
     totalPlaytime,

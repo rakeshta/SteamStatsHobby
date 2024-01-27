@@ -33,8 +33,23 @@ export interface PlayerGameStats {
   /** The game's name. */
   name: string;
 
+  /** A short description of the game. */
+  shortDescription: string;
+
+  /** The list of developers. */
+  developers: string[];
+
+  /** The list of publishers */
+  publishers: string[];
+
+  /** A list of genres for the game. */
+  genres: string[];
+
   /** The game's image URL. */
   imageUrl: string;
+
+  /** The game's background image URL. */
+  backgroundImageUrl: string;
 
   /** The time the player has spent playing this game. */
   playtime: number;
