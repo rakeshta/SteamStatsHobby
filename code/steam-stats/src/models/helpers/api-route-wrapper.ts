@@ -1,7 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import { ApiError } from '@models/errors';
-import { ApiErrorCode, ApiResultError, ApiResultSuccess } from '@models/types';
+import { ApiError, ApiErrorCode, ApiResultError, ApiResultSuccess } from '@models/api';
 
 /** An API handler function that handles a request and returns some data. */
 export type ApiHandler<Params = Record<string, string>> = (

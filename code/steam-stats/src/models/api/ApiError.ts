@@ -1,4 +1,4 @@
-import { ApiErrorCode } from '@models/types';
+import { ApiErrorCode } from '@models/api';
 
 /** An API error that encapsulates the description & status code for the error response. */
 export class ApiError extends Error {

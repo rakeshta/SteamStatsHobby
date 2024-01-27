@@ -1,6 +1,5 @@
+import { ApiError, ApiErrorCode } from '@models/api';
 import { Config } from '@models/config';
-import { ApiError } from '@models/errors';
-import { ApiErrorCode } from '@models/types';
 
 import { SteamAppDetails, SteamOwnedGame, SteamPlayerSummary } from '.';
 

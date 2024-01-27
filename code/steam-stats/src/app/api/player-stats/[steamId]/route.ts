@@ -1,9 +1,8 @@
 import { sortBy } from 'lodash';
 
-import { ApiError } from '@models/errors';
+import { ApiError, ApiErrorCode, PlayerGameStats, PlayerStats } from '@models/api';
 import { apiRouteWrapper } from '@models/helpers';
 import { SteamApi } from '@models/steam';
-import { ApiErrorCode, PlayerGameStats, PlayerStats } from '@models/types';
 
 const MOST_PLAYED_GAME_COUNT = 10;
 
