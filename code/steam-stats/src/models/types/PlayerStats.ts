@@ -14,4 +14,22 @@ export interface PlayerStats {
 
   /** The time the player was last seen online. */
   lastLogoffAt: number;
+
+  /** The list of most played games for this player sorted in descending order. */
+  mostPlayedGames: PlayerGameStats[];
+}
+
+/** Game details & stats associated with the player for it. */
+export interface PlayerGameStats {
+  /** The game's Steam ID. */
+  appId: number;
+
+  /** The game's name. */
+  name: string;
+
+  /** The game's image URL. */
+  imageUrl: string;
+
+  /** The time the player has spent playing this game. */
+  playtime: number;
 }
