@@ -29,13 +29,14 @@ export function GameCard({ className, game }: Props) {
         </CardHeader>
         <CardContent className='pb-2 px-4 sm:mb-3 flex flex-wrap'>
           {game.genres.map((genre) => (
-            <div key={genre} className='rounded-sm border border-muted px-1 text-sm text-muted-foreground mr-2 mb-2'>
+            <div
+              key={genre}
+              className='rounded-sm border border-slate-500 px-1 text-sm text-muted-foreground mr-2 mb-2'
+            >
               {genre}
             </div>
           ))}
-          <p className='text-ellipsis overflow-hidden mt-2 text-sm text-slate-300 hidden lg:block'>
-            {game.shortDescription}
-          </p>
+          <p className='mt-2 text-sm text-slate-300 hidden lg:block'>{game.shortDescription}</p>
         </CardContent>
       </div>
     </Card>
