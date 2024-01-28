@@ -41,7 +41,7 @@ async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
   const totalPlaytime = ownedGames.reduce((sum, game) => sum + game.playtime_forever, 0);
 
   // fetch game details for all most played games in parallel
-  const mostPlayedGames: PlayerGameStats[] = [];
+  let mostPlayedGames: PlayerGameStats[] = [];
   const fetchPromises = ownedGamesTopN.map(async (game) => {
     try {
       // fetch & parse game details
@@ -66,6 +66,9 @@ async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
 
   // wait for all fetches to complete
   await Promise.all(fetchPromises);
+
+  // sort most played again as the promises may have completed in a different order
+  mostPlayedGames = sortBy(mostPlayedGames, 'playtime').reverse();
 
   // return composed gaming stats
   return {
