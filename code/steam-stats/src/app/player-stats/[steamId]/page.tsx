@@ -9,6 +9,15 @@ export interface Props {
   };
 }
 
+export async function generateMetadata({ params: { steamId } }: Props) {
+  const stats = await Api.fetchPlayerStats(steamId);
+  return {
+    title: `${stats.displayName} - Steam Stats`,
+    description: `Steam stats for ${stats.displayName}`,
+    image: stats.avatarUrl,
+  };
+}
+
 export default async function PlayerStatsPage({ params: { steamId } }: Props) {
   const stats = await Api.fetchPlayerStats(steamId);
   return (
