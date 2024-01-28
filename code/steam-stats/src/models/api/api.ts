@@ -2,8 +2,7 @@ import { ApiError, ApiResult, PlayerStats } from '.';
 
 // constants -----------------------------------------------------------------------------------------------------------
 
-const API_BASE_URL =
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://localhost:${process.env.PORT || 3000}`;
+const API_BASE_URL = process.env.BASE_URL ? process.env.BASE_URL : `http://localhost:${process.env.PORT || 3000}`;
 
 // helpers -------------------------------------------------------------------------------------------------------------
 
