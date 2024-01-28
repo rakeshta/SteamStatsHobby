@@ -18,7 +18,7 @@ export interface PlayerStats {
   /** The number of games owned by the player. */
   ownedGameCount: number;
 
-  /** Total playtime across all games. */
+  /** Total playtime across all games (in minutes). */
   totalPlaytime: number;
 
   /** The list of most played games for this player sorted in descending order. */
@@ -51,6 +51,6 @@ export interface PlayerGameStats {
   /** The game's background image URL. */
   backgroundImageUrl: string;
 
-  /** The time the player has spent playing this game. */
+  /** The time the player has spent playing this game (in minutes). */
   playtime: number;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Card, CardDescription, CardHeader, CardTitle } from '@components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@components/ui/card';
 import { DateFormat } from '@lib/date-format';
 import clsx from 'clsx';
 
@@ -19,6 +19,20 @@ export function PlayerSummary({ className, stats }: Props) {
           <CardTitle>{stats.displayName}</CardTitle>
           <CardDescription>On Steam since {DateFormat.long(stats.createdAt * 1000)}</CardDescription>
         </CardHeader>
+        <CardContent>
+          <div className='flex flex-row space-x-8'>
+            <div className='flex flex-col'>
+              <span className='text-lg font-semibold'>{stats.ownedGameCount}</span>
+              <span className='text-sm text-muted-foreground'>Games owned</span>
+            </div>
+            <div className='flex flex-col'>
+              <span className='text-lg font-semibold'>
+                {(stats.totalPlaytime / 60).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+              </span>
+              <span className='text-sm text-muted-foreground'>Lifetime hours played</span>
+            </div>
+          </div>
+        </CardContent>
       </div>
     </Card>
   );
