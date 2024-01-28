@@ -13,7 +13,14 @@ export function GameCard({ className, game }: Props) {
   return (
     <Card className={clsx('flex flex-col sm:flex-row overflow-hidden sm:h-40', className)}>
       <img src={game.imageUrl} alt='Game Logo' />
-      <div className='flex flex-col'>
+      <div
+        className='flex flex-col flex-1 relative'
+        style={{
+          backgroundImage: `url(${game.backgroundImageUrl})`,
+          backgroundSize: 'cover',
+        }}
+      >
+        <div className='absolute inset-0 bg-gradient-to-r from-black opacity-10' />
         <CardHeader className='flex-auto px-4 py-3'>
           <CardTitle>{game.name}</CardTitle>
           <CardDescription className=''>
