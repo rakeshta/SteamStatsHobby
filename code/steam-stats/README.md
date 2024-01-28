@@ -45,3 +45,4 @@ Or follow the instructions below to run it locally.
 - If any of your top 10 most played games is no longer in the store, the server will not skip to the next game in the
   list. This will cause the resulting list to have less than 10 items.
 - Loading page is being ignored by NextJS.
+- Error handling that works locally does not work when hosted on Vercel.
