@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Api } from '@models/api';
 
+import { MostPlayed } from './MostPlayed';
 import { PlayerSummary } from './PlayerSummary';
 
 export interface Props {
@@ -21,8 +22,9 @@ export async function generateMetadata({ params: { steamId } }: Props) {
 export default async function PlayerStatsPage({ params: { steamId } }: Props) {
   const stats = await Api.fetchPlayerStats(steamId);
   return (
-    <main className='flex min-h-screen flex-col justify-between'>
+    <main className='flex flex-col space-y-8'>
       <PlayerSummary stats={stats} />
+      <MostPlayed stats={stats} />
     </main>
   );
 }
