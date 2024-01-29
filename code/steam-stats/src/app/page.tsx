@@ -15,8 +15,8 @@ export default function Home() {
 
   // render
   return (
-    <main className='flex-1 flex flex-col items-center justify-center p-24'>
-      <h1 className='text-4xl font-bold'>Steam Stats</h1>
+    <main className='flex-1 flex flex-col items-center justify-center md:p-24'>
+      <h1 className='text-4xl font-bold text-center'>Steam Stats</h1>
       <h2 className='text-lg text-center mt-4'>{"What's your play style? Enter your Steam ID to find out!"}</h2>
       <div className='flex w-full max-w-sm items-center space-x-2 mt-16'>
         <Input
