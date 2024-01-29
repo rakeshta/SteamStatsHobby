@@ -11,7 +11,7 @@ export interface Props {
 
 export function GameCard({ className, game }: Props) {
   return (
-    <Card className={clsx('flex flex-col sm:flex-row overflow-hidden sm:h-40', className)}>
+    <Card className={clsx('flex flex-col sm:flex-row overflow-hidden sm:h-40 group', className)}>
       <img src={game.imageUrl} alt='Game Logo' />
       <div
         className='flex flex-col flex-1 relative'
@@ -38,6 +38,18 @@ export function GameCard({ className, game }: Props) {
           ))}
           <p className='mt-2 text-sm text-slate-300 hidden lg:block'>{game.shortDescription}</p>
         </CardContent>
+
+        {/* visit store */}
+        <div className='absolute top-3 right-3'>
+          <a
+            href={game.storeUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-sm text-muted group-hover:text-slate-400 transition-colors duration-400 cursor-pointer'
+          >
+            &nbsp;↗&nbsp;
+          </a>
+        </div>
       </div>
     </Card>
   );

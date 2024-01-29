@@ -45,6 +45,9 @@ export interface PlayerGameStats {
   /** A list of genres for the game. */
   genres: string[];
 
+  /** Store URL */
+  storeUrl: string;
+
   /** The game's image URL. */
   imageUrl: string;
 

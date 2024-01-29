@@ -6,6 +6,8 @@ import { SteamApi } from '@models/steam';
 
 const MOST_PLAYED_GAME_COUNT = 10;
 
+const STORE_URL_PREFIX = 'https://store.steampowered.com/app/';
+
 // local types ---------------------------------------------------------------------------------------------------------
 
 type PlayerInfo = Omit<PlayerStats, 'ownedGameCount' | 'totalPlaytime' | 'mostPlayedGames'>;
@@ -54,6 +56,7 @@ async function _fetchGamingStats(steamId: string): Promise<GamingStats> {
         publishers: appDetails.publishers,
         genres: appDetails.genres.map((genre) => genre.description),
         imageUrl: appDetails.header_image,
+        storeUrl: STORE_URL_PREFIX + game.appid,
         backgroundImageUrl: appDetails.background,
         playtime: game.playtime_forever,
       });
